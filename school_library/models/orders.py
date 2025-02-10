@@ -51,3 +51,4 @@ class LibraryBookOrder(models.Model):
 
             if  record.return_date and record.status == 'borrowed':
                 raise ValidationError("If return date is entered, the status must be 'returned' .")
+            
