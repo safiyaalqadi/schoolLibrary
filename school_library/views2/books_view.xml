@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_library_book_form" model="ir.ui.view">
+        <field name="name">library.book.form</field>
+        <field name="model">library.book</field>
+        <field name="arch" type="xml">
+            <form string="Book">
+                <sheet>
+                    <group>
+                        <field name="name" string="Book Title" required="1"/>
+                        <field name="author_id" string="Author" required="1"/>
+                        <field name="isbn" string="ISBN"/>
+                        <field name="available_copies" string="Available Copies" required="1"/>
+                        <field name="published_date" string="Publish Date" required="1"/>
+                        <field name="category_id" string="Category"/>
+                    </group>
+                </sheet>
+                  <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" class="oe_chatter_followers"/>
+                    <field name="message_ids" widget="mail_thread" class="oe_chatter_messages"/>
+                </div>
+            </form>
+        </field>
+    </record>
+       <record id="view_library_book_tree" model="ir.ui.view">
+        <field name="name">library.book.tree</field>
+        <field name="model">library.book</field>
+        <field name="arch" type="xml">
+            <tree string="Books">
+                <field name="name" string="Book Title" required="1"/>
+                <field name="author_id" string="Author" required="1"/>
+                <field name="isbn" string="ISBN"/>
+                <field name="available_copies" string="Available Copies" required="1"/>
+                <field name="published_date" string="Publish Date" required="1"/>
+                <field name="category_id" string="Category" required="1"/>
+                <field name="order_line_ids" string="Orders"/>
+            </tree>
+        </field>
+    </record>
+</odoo>
+
+

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_library_book_order_calendar" model="ir.ui.view">
+        <field name="name">library.book.order.calendar</field>
+        <field name="model">library.book.order</field>
+        <field name="arch" type="xml">
+            <calendar string="Library Book Orders"
+                      date_start="order_date"
+                      date_stop="return_date">
+                <field name="students_id"/>
+                <field name="order_date"/>
+                <field name="return_date"/>
+                <field name="status"/>
+            </calendar>
+        </field>
+    </record>
+    <record id="action_library_book_order_calendar" model="ir.actions.act_window">
+        <field name="name">Book Orders Calendar</field>
+        <field name="res_model">library.book.order</field>
+        <field name="view_mode">calendar</field>
+    </record>
+
+</odoo>

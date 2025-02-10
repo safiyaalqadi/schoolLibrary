@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<record id="action_library_category" model="ir.actions.act_window">
+    <field name="name">Categories</field>
+    <field name="res_model">library.book.category</field>
+    <field name="view_mode">tree,form</field>
+    <field name="view_id" ref="view_library_category_tree"/>
+    <field name="target">current</field>
+</record>
+</odoo>

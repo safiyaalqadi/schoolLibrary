@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_library_book_search" model="ir.ui.view">
+        <field name="name">library.book.search</field>
+        <field name="model">library.book</field>
+        <field name="arch" type="xml">
+            <search string="Search Books">
+                <field name="name" string="Book Title"/>
+                <field name="author" string="Author"/>
+                <filter string="Available Books" domain="[('available_copies', '>', 0)]"/>
+                <filter string="Out of Stock" domain="[('available_copies', '=', 0)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_library_book_form" model="ir.ui.view">
+        <field name="name">library.book.form</field>
+        <field name="model">library.book</field>
+        <field name="arch" type="xml">
+            <form string="Book">
+                <sheet>
+                    <group>
+                        <field name="name" string="Book Title" required="1"/>
+                        <field name="author" string="Author" required="1"/>
+                        <field name="isbn" string="ISBN"/>
+                        <field name="available_copies" string="Available Copies" required="1"/>
+                        <field name="published_date" string="Publish Date" required="=1"/>
+                        <field name="category_id" string="Category"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+       <record id="view_library_book_tree" model="ir.ui.view">
+        <field name="name">library.book.tree</field>
+        <field name="model">library.book</field>
+        <field name="arch" type="xml">
+            <tree string="Books">
+                <field name="name" string="Book Title" required="1"/>
+                <field name="author" string="Author" required="1"/>
+                <field name="isbn" string="ISBN"/>
+                <field name="available_copies" string="Available Copies" required="1"/>
+                <field name="published_date" string="Publish Date" required="=1"/>
+                <field name="category_id" string="Category" required="=1"/>
+            </tree>
+        </field>
+    </record>
+</odoo>
+
+

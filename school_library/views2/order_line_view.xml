@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_library_order_line_form" model="ir.ui.view">
+        <field name="name">library.book.order.line.form</field>
+        <field name="model">library.book.order.line</field>
+        <field name="arch" type="xml">
+            <form string="Orders Line">
+                <sheet>
+                    <group>
+                       <field name="book_id" string="Book ID" requerd="1"/>
+                       <field name="quantity" string="Quantity" requerd="1" defult="1"/>
+                    </group>
+                </sheet>
+                  <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" class="oe_chatter_followers"/>
+                    <field name="message_ids" widget="mail_thread" class="oe_chatter_messages"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="view_library_order_line_tree" model="ir.ui.view">
+        <field name="name">library.book.order.line.tree</field>
+        <field name="model">library.book.order.line</field>
+        <field name="arch" type="xml">
+            <tree string="Orders Line">
+                <field name="book_id" string="Book ID"/>
+                <field name="quantity" string="Quantity"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

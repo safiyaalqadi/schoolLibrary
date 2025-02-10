@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo >
+    <record id="view_library_author_form" model="ir.ui.view">
+        <field name="name">library.author.form</field>
+        <field name="model">library.author</field>
+        <field name="arch" type="xml">
+            <form string="Author">
+                <sheet>
+                    <group>
+                        <field name="name" string="Author Name" required="1"/>
+                        <field name="biography" string="Biography"/>
+                    </group>
+                </sheet>
+                  <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" class="oe_chatter_followers"/>
+                    <field name="message_ids" widget="mail_thread" class="oe_chatter_messages"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_library_author_tree" model="ir.ui.view">
+        <field name="name">library.author.tree</field>
+        <field name="model">library.author</field>
+        <field name="arch" type="xml">
+            <tree string="Authors">
+                <field name="name" string="Author Name"/>
+                <field name="biography" string="Biography"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

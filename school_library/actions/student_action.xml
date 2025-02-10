@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<record id="action_library_student" model="ir.actions.act_window">
+    <field name="name">Students</field>
+    <field name="res_model">library.students</field>
+    <field name="view_mode">tree,form</field>
+    <field name="view_id" ref="view_library_student_tree"/>
+    <field name="target">current</field>
+</record>
+</odoo>

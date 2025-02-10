@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<record id="action_library_book_return_report" model="ir.actions.report">
+    <field name="name">Books Not Returned Report</field>
+    <field name="model">library.book.return.report</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">module_name.report_books_not_returned</field>
+    <field name="print_report_name">'Books Not Returned Report - ' + object.name</field>
+</record>
+    <report
+        id="action_report_custom_model"
+        model="library.book.order"
+        string="Books Report"
+        report_type="qweb-pdf"
+        name="action_report_custom_model.report_books_not_returned"
+        file="action_report_custom_model.report_custom_model"
+        print_report_name="'Custom Report - %s' % (object.name)"
+    />
+</odoo>

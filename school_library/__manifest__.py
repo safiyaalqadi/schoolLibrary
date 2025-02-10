@@ -1,0 +1,34 @@
+{
+   'name':'School Library',
+   'category': 'service',
+    'author': 'safia alqadi',
+    'version': '1.0',
+    'summary': 'This app helps manage library books, student borrowing, and inventory. Features include book tracking, student management, and real-time updates on available books and overdue items..',
+    'depends': ['mail'],
+    'data':[
+          'security/ir.model.access.csv',
+          'views2/books_view.xml',
+          'views2/category_view.xml',
+          'views2/orders_view.xml',
+          'views2/order_line_view.xml',
+          'views2/students_view.xml',
+          'views2/authors_view.xml',
+          'views2/report_returndstatuse_weekly.xml',
+          'actions/book_action.xml',
+          'data/library_book_order_sequence.xml',
+          'actions/category_action.xml',
+          'actions/order_action.xml',
+          'actions/student_action.xml',
+          'actions/order_line_action.xml',
+          'actions/author_action.xml',
+          'actions/report_returnd_weekly.xml',
+          'views2/order_calnedar.xml',
+          'views2/library_menu.xml',
+         'report/report_returnd_weekly.xml',
+         'report/report_returndstatuse_weekly.xml'
+    ],
+   'installable': True,
+   'application': True,
+
+
+}

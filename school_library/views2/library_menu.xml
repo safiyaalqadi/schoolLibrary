@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_library"
+              name="Library"
+              sequence="10"
+
+              />
+
+    <menuitem id="menu_library_book"
+              name="Books"
+              parent="menu_library"
+              action="action_library_book"
+              sequence="4"/>
+
+    <menuitem id="menu_library_category"
+              name="Categories"
+              parent="menu_library"
+              action="action_library_category"
+              sequence="4"/>
+
+    <menuitem id="menu_library_student"
+              name="Students"
+              parent="menu_library"
+              action="action_library_student"
+              sequence="4"/>
+
+    <menuitem id="menu_library_order"
+              name="Orders"
+              parent="menu_library"
+              action="action_library_order"
+              sequence="4"/>
+
+     <menuitem id="menu_library_author"
+              name="Authors"
+              parent="menu_library"
+              action="action_library_author"
+              sequence="4"/>
+
+    <menuitem id="library_book_order_calendar_menu"
+              name="Book Orders Calendar"
+              parent="menu_library"
+              action="action_library_book_order_calendar"/>
+
+    <menuitem id="menu_library_report_book"
+                  name="Books Not Returned"
+                  parent="menu_library"
+                  action="action_library_book_return_report"
+                  sequence="5"/>
+
+</odoo>

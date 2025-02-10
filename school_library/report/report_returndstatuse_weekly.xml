@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="report_books_not_returned" name="Books Not Returned Report">
+     <t t-call="web.basic_layout">
+            <div class="page">
+                <h2>Custom Report for <t t-esc="doc.name"/></h2>
+                <p>Description: <t t-esc="doc.description"/></p>
+            </div>
+        </t>
+    <t t-foreach="docs" t-as="order">
+        <div>
+            <h3>Order ID: <span t-field="order.name"/></h3>
+            <p>Borrower: <span t-field="order.students_id.name"/></p>
+            <p>Order Date: <span t-field="order.order_date"/></p>
+            <p>Status: <span t-field="order.status"/></p>
+            <p>Book(s):
+                <t t-foreach="order.order_line_ids" t-as="line">
+                    <span t-field="line.book_id.name"/> - <span t-field="line.quantity"/>
+                    <br/>
+                </t>
+            </p>
+        </div>
+    </t>
+</template>
+</odoo>

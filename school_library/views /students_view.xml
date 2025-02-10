@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_library_student_search" model="ir.ui.view">
+        <field name="name">library.students.search</field>
+        <field name="model">library.students</field>
+        <field name="arch" type="xml">
+            <search string="Search Students">
+                <field name="name" string="Student Name"/>
+                <field name="email" string="email"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_library_students_form" model="ir.ui.view">
+        <field name="name">library.students.form</field>
+        <field name="model">library.students</field>
+        <field name="arch" type="xml">
+            <form string="Students">
+                <sheet>
+                    <group>
+                        <field name="name" string="Student Name" required="1"/>
+                        <field name="email"  string="email" required="1" />
+                        <field name="phone"  string="phone" required="1"  />
+                        <field name="address" string="address " required="1"/>
+                        <field name="order_ids" string="Orders"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" class="oe_chatter_followers"/>
+                    <field name="message_ids" widget="mail_thread" class="oe_chatter_messages"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+       <record id="view_library_student_tree" model="ir.ui.view">
+        <field name="name">library.students.tree</field>
+        <field name="model">library.students</field>
+        <field name="arch" type="xml">
+            <tree string="Students">
+               <field name="name" string="Student Name" required="1"/>
+                        <field name="email" string="email" required="1"/>
+                        <field name="phone" string="phone" required="1"/>
+                        <field name="address" string="address " required="1"/>
+                        <field name="order_ids" string="Orders"/>
+            </tree>
+        </field>
+        </record>
+</odoo>
+
+
