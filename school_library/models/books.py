@@ -39,3 +39,4 @@ class LibraryBook(models.Model):
             if not re.match(isbn_10_pattern, isbn) and not re.match(isbn_13_pattern, isbn):
                 raise ValidationError("The ISBN number is not valid. Please enter a valid ISBN-10 or ISBN-13.")
 
+
