@@ -7,6 +7,7 @@ class LibraryBookOrder(models.Model):
     _description = 'Library Book Order'
     _inherit = ['mail.thread']
 
+
     students_id = fields.Many2one('library.students', string="Library student", tracking=True,required=True)
     order_date = fields.Datetime(string="Order Date", default=fields.Datetime.now,tracking=True)
     return_date = fields.Datetime(string="Return Date",tracking=True)
