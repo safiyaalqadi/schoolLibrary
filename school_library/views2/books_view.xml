@@ -4,24 +4,25 @@
         <field name="name">library.book.form</field>
         <field name="model">library.book</field>
         <field name="arch" type="xml">
-            <header>
+
+            <form string="Book">
+
+                <sheet>
+                    <header>
                <field name="status" widget="statusbar"
                      statusbar_visible="available,borrowed,out_of_stock"
                      decoration-success="status == 'available'"
                      decoration-warning="status == 'borrowed'"
                     decoration-danger="status == 'out_of_stock'"
                />
-            </header>
-            <form string="Book">
-
-                <sheet>
+              </header>
                      <notebook> <!-- new task1 -->
                          <page string="Book Details">
-
                               <group name="Book_details" string="Book details">
                               <field name="name" string="Book Title" required="1"/>
                               <field name="isbn" string="ISBN" help="Enter the unique ISBN number for the book"/>
                               <field name="published_date" string="Publish Date" required="1"/>
+
                              </group>
 
                          <group name="Book_Authors_category" string="Authors and Category">
@@ -30,9 +31,11 @@
                              </group>
 
                           <group name="available_copies" string="Availability and Orders">
+                              <field name="daily_price"  string="Price per day" widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1"/>
+                              <field name="currency_id" string="currency"  invisible="1" />
                               <field name="available_copies" string=" Copies" required="1"/>
-                                <field name="borrowed_copies" string="borrowed_copies" readonly="1"/>
-                              <field name="available_copies_to_order" string="vailable Copies" readonly="1"/>
+                              <field name="borrowed_copies" string="borrowed_copies" readonly="1"/>
+                              <field name="available_copies_to_order" string="available Copies" readonly="1"/>
                             </group>
                          </page>
                          <page  string="Order history">
@@ -41,10 +44,15 @@
                                   <field name="order_id" string="Order Reference"/>
                                    <field name="book_id" string="Book"/>
                                   <field name="quantity" string="Quantity"/>
+                                   <field name="total_price_per_day" string="Total Price Per day" readonly="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                   <field name="currency_id" string="currency" invisible="1"/>
+                                   <field name="total_price_in_order" string="Total in order" readonly="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                                   <!--<field name="order_id.order_date" string="Order Date"/>
                                    <field name="order_id.return_date" string="Deturn Date"/>-->
                               </tree>
+
                              </field>
+                             <field  name="total_price_history" string="Total Borrowed Cost "  readonly="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                          </page>
                      </notebook>
                 </sheet>

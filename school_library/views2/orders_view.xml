@@ -15,6 +15,9 @@
                       <field name="return_date" string="Return Date" groups="school_library.group_librarian"/>
                       <field name="order_line_ids" string="Order Line Ids" />
                       <field name="total_books_borrowed" readonly="1"/>
+                       <field name="total_price"  widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1"/>
+                         <field name="currency_id" string="currency"  invisible="1" />
+                        <field name="total_days" readonly="1"/>
                     </group>
                   </sheet>
                  <div class="oe_chatter">
@@ -40,6 +43,9 @@
                 decoration-danger="status == 'overdue'"
                 />
                 <field name="order_line_ids" string="Order Line Ids"/>
+                <field name="total_price"  widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1"/>
+                  <field name="currency_id" string="currency"  invisible="1" />
+
             </tree>
         </field>
     </record>

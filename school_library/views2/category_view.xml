@@ -7,6 +7,7 @@
             <search string="Search Category">
                 <field name="name" string="Category Name" required="1"/>
                  <field name="description" string="description"/>
+
             </search>
         </field>
     </record>
@@ -20,6 +21,8 @@
                     <group>
                         <field name="name" string="Category Name" required="1"/>
                          <field name="description" string="description"/>
+                        <field name="daily_price" string ="Daily Price" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                       <field name="currency_id"/>
                     </group>
                 </sheet>
                   <div class="oe_chatter">
@@ -37,6 +40,8 @@
             <tree string="Categories">
                 <field name="name" string="Category Name"/>
                 <field name="description" string="description"/>
+                 <field name="daily_price" string ="Daily Price" widget="monetary" options="{'currency_field': 'currency_id'}"  />
+                <field name="currency_id" invisible="1"/>
             </tree>
         </field>
     </record>

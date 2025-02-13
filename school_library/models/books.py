@@ -23,6 +23,19 @@ class LibraryBook(models.Model):
         ('borrowed', 'Borrowed'),
         ('out_of_stock', 'Out of Stock')
     ], string='Status', default='available',compute='_compute_status')
+    daily_price=fields.Float(string="Daily borrow Price",compute='_compute_daily_price')
+    currency_id = fields.Many2one('res.currency', string="Currency", default=lambda self: self.env.company.currency_id)
+    total_price_history=fields.Float(string="Daily borrow Price",compute='_compute_history_price')
+
+    @api.depends('order_line_ids')
+    def _compute_history_price(self):
+       for record in self:
+           self.total_price_history = sum(line.total_price_in_order for line in record.order_line_ids)
+
+    @api.depends('category_id')
+    def _compute_daily_price(self):
+        for record in self:
+          record.daily_price=record.category_id.daily_price
 
     @api.depends('order_line_ids.quantity','order_line_ids.order_id.status')
     def _compute_borrowed_copies(self):

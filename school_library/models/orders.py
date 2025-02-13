@@ -10,6 +10,10 @@ class LibraryBookOrder(models.Model):
     students_id = fields.Many2one('library.students', string="Library student", tracking=True,required=True)
     order_date = fields.Datetime(string="Order Date", default=fields.Datetime.now,tracking=True)
     return_date = fields.Datetime(string="Return Date",tracking=True)
+    total_price = fields.Float(string='Total Price', compute="_compute_total_price",store=True,default=0)
+    currency_id = fields.Many2one('res.currency', string="Currency", default=lambda self: self.env.company.currency_id)
+
+    total_days=fields.Float(string='Total days', compute="_compute_total_price",default=0)
     status = fields.Selection([
         ('draft', 'Draft'),
         ('borrowed', 'Borrowed'),
@@ -39,10 +43,8 @@ class LibraryBookOrder(models.Model):
         default=lambda self: self.env['ir.sequence'].next_by_code('library.book.order.sequence')
       )
 
-
-
     @api.constrains('return_date', 'order_date','order_line_ids')
-    def _check_return_date_and_status2(self):
+    def _check_return_date_and_status2(self):#see the other options for api
         for record in self:
             if record.return_date and record.return_date < record.order_date:
                 raise ValidationError("The return date cannot be earlier than the order date.")
@@ -60,10 +62,23 @@ class LibraryBookOrder(models.Model):
      #new task 1
     @api.depends('order_line_ids.quantity')
     def _compute_total_books_borrowed(self):
-        for order in self:
+        for order in self:#no need
             order.total_books_borrowed = sum(line.quantity for line in order.order_line_ids)
 
-    # new task 1
+
+    #new task 2
+    @api.depends('return_date','order_line_ids.total_price_per_day')
+    def _compute_total_price(self):
+        for order in self:
+          if order.return_date:
+            order.total_days=(order.return_date - order.order_date).days
+            order.total_price = sum(line.total_price_per_day for line in order.order_line_ids) *  order.total_days
+          else:
+            order.total_price=0
+            order.total_days=0
+
+
+            # new task 1
     @api.depends('status')
     def _compute_status_bar(self):
         for order in self:
