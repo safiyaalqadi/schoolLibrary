@@ -67,7 +67,7 @@
                 <field name="available_copies" string="Available Copies" required="1"/>
                 <field name="published_date" string="Publish Date" required="1"/>
                 <field name="category_id" string="Category" required="1"/>
-                <field name="order_line_ids" string="Orders"/>
+                <field name="order_line_ids" string="Orders" />
                 <field name="status" string="status"  widget="badge"
                 decoration-success="status == 'available'"
                 decoration-warning="status == 'borrowed'"

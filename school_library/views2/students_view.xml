@@ -36,12 +36,12 @@
         <field name="model">library.students</field>
         <field name="arch" type="xml">
             <tree string="Students">
-               <field name="name" string="Student Name" required="1"/>
-                        <field name="email" string="email" required="1"/>
-                        <field name="phone" string="phone" required="1"/>
-                        <field name="address" string="address " required="1"/>
-                        <field name="order_ids" string="Orders"/>
+                        <field name="name" string="Student Name" />
                         <field name="user_id" string="User" widget="many2one_avatar_user"/>
+                        <field name="email" string="email" widget="email" />
+                        <field name="phone" string="phone" widget="phone" />
+                        <field name="address" string="address "/>
+                        <field name="order_ids" string="Orders" widget="many2many_tags"/>
              </tree>
         </field>
        </record>

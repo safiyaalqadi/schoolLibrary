@@ -30,8 +30,8 @@
         <field name="arch" type="xml">
             <tree string="Orders" class="o_library_order_tree" >
                 <field name="students_id" string="Student Name" />
-                <field name="order_date" string="Order Date"/>
-                <field name="return_date" string="Return Date"/>
+                <field name="order_date" string="Order Date" widget="date"/>
+                <field name="return_date" string="Return Date" widget="date"/>
                 <field name="status" string="Status"
                 widget="badge"
                 decoration-success="status == 'returned'"

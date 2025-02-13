@@ -27,10 +27,7 @@
           'views2/library_menu.xml',
          'report/report_returnd_weekly.xml',
          'report/report_returndstatuse_weekly.xml',
-
     ],
    'installable': True,
    'application': True,
-
-
 }
