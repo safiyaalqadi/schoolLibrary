@@ -14,6 +14,7 @@
             </calendar>
         </field>
     </record>
+
     <record id="action_library_book_order_calendar" model="ir.actions.act_window">
         <field name="name">Book Orders Calendar</field>
         <field name="res_model">library.book.order</field>

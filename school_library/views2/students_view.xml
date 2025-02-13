@@ -21,6 +21,7 @@
                         <field name="email" string="email" required="1" widget="email"/>
                         <field name="phone" string="phone" required="1" widget="phone"/>
                         <field name="address" string="address " required="1"/>
+                        <field name="user_id" string="user"  required="1"/>
                     </group>
                 </sheet>
                 <div class="oe_chatter">
@@ -40,6 +41,7 @@
                         <field name="phone" string="phone" required="1"/>
                         <field name="address" string="address " required="1"/>
                         <field name="order_ids" string="Orders"/>
+                        <field name="user_id" string="User" widget="many2one_avatar_user"/>
              </tree>
         </field>
        </record>

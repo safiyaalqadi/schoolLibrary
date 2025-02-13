@@ -3,7 +3,6 @@
     <menuitem id="menu_library"
               name="Library"
               sequence="10"
-
               />
 
     <menuitem id="menu_library_book"
@@ -16,12 +15,14 @@
               name="Categories"
               parent="menu_library"
               action="action_library_category"
+              groups="school_library.group_librarian"
               sequence="4"/>
 
     <menuitem id="menu_library_student"
               name="Students"
               parent="menu_library"
               action="action_library_student"
+              groups="school_library.group_librarian"
               sequence="4"/>
 
     <menuitem id="menu_library_order"
@@ -34,6 +35,7 @@
               name="Authors"
               parent="menu_library"
               action="action_library_author"
+              groups="school_library.group_librarian"
               sequence="4"/>
 
     <menuitem id="library_book_order_calendar_menu"
@@ -46,5 +48,4 @@
                   parent="menu_library"
                   action="action_library_book_return_report"
                   sequence="5"/>
-
 </odoo>

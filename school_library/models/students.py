@@ -12,6 +12,7 @@ class LibraryMember(models.Model):
     phone = fields.Char(string="Phone",tracking=True)
     address = fields.Text(string="Address",tracking=True)
     order_ids = fields.One2many('library.book.order', 'students_id', string="Book Orders")
+    user_id = fields.Many2one('res.users', string='Assigned User', tracking=True)
 
     @api.constrains('email')
     def _check_email(self):

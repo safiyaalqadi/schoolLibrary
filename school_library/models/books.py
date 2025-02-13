@@ -15,7 +15,32 @@ class LibraryBook(models.Model):
     description = fields.Text(string="Description",tracking=True)
     category_id = fields.Many2one('library.book.category', string="Category",tracking=True)
     available_copies = fields.Integer(string="Available Copies", default=1,tracking=True)
+    available_copies_to_order=fields.Integer(string="Available Copies",compute='_compute_borrowed_copies',default=1,store=True)
+    borrowed_copies = fields.Integer(string="Borrowed Copies", compute="_compute_borrowed_copies", store=True)
     order_line_ids = fields.One2many('library.book.order.line', 'book_id', string="Order Lines")
+    status=fields.Selection([#new task 1
+        ('available', 'Available'),
+        ('borrowed', 'Borrowed'),
+        ('out_of_stock', 'Out of Stock')
+    ], string='Status', default='available',compute='_compute_status')
+
+    @api.depends('order_line_ids.quantity','order_line_ids.order_id.status')
+    def _compute_borrowed_copies(self):
+        for record in self:
+            borrowed_count = sum(line.quantity for line in record.order_line_ids if line.order_id.status != 'returned')
+            record.borrowed_copies = borrowed_count
+            record.available_copies_to_order=record.available_copies - record.borrowed_copies
+
+    @api.depends('available_copies', 'borrowed_copies')
+    def _compute_status(self):
+        for record in self:
+            if record.borrowed_copies >= record.available_copies:
+                record.status = 'out_of_stock'
+            elif record.borrowed_copies > 0:
+                record.status = 'borrowed'
+            else:
+                record.status = 'available'
+
 
     @api.constrains('name', 'isbn')
     def _check_book_unique(self):

@@ -6,31 +6,39 @@
         <field name="arch" type="xml">
             <form string="Orders Line">
                 <sheet>
-                    <group>
+                     <group>
+                        <field name="status" widget="statusbar" statusbar_visible="draft,borrowed,returned,overdue"/>
+                     </group>
+                     <group>
                       <field name="students_id" string="student Name" requerd="1"/>
-                      <field name="order_date" string="Order Date" />
-                      <field name="return_date" string="Return Date"/>
-                      <field name="status" string="Status"/>
-                      <field name="order_line_ids" string="Order Line Ids" widget="many2many_tags"/>
+                      <field name="order_date" string="Order Date" readonly="1"/>
+                      <field name="return_date" string="Return Date" groups="school_library.group_librarian"/>
+                      <field name="order_line_ids" string="Order Line Ids" />
+                      <field name="total_books_borrowed" readonly="1"/>
                     </group>
-                </sheet>
-                  <div class="oe_chatter">
+                  </sheet>
+                 <div class="oe_chatter">
                     <field name="message_follower_ids" widget="mail_followers" class="oe_chatter_followers"/>
                     <field name="message_ids" widget="mail_thread" class="oe_chatter_messages"/>
-                </div>
+                 </div>
             </form>
         </field>
     </record>
-
     <record id="view_library_order_tree" model="ir.ui.view">
         <field name="name">library.book.order.tree</field>
         <field name="model">library.book.order</field>
         <field name="arch" type="xml">
-            <tree string="Orders">
-                <field name="students_id" string="Student Name"/>
+            <tree string="Orders" class="o_library_order_tree" >
+                <field name="students_id" string="Student Name" />
                 <field name="order_date" string="Order Date"/>
                 <field name="return_date" string="Return Date"/>
-                <field name="status" string="Status"/>
+                <field name="status" string="Status"
+                widget="badge"
+                decoration-success="status == 'returned'"
+                decoration-warning="status == 'borrowed'"
+                decoration-muted="status == 'draft'"
+                decoration-danger="status == 'overdue'"
+                />
                 <field name="order_line_ids" string="Order Line Ids"/>
             </tree>
         </field>
