@@ -17,7 +17,7 @@ class LibraryMember(models.Model):
     order_ids = fields.One2many('library.book.order', 'students_id', string="Book Orders")
     user_id = fields.Many2one('res.users', string='Assigned User', tracking=True)
     order = fields.Integer(string='order',compute='compute_student_order',store=True,default=-1)# order of student in top ten not the order of books
-    rank=fields.Integer(string='rank',default=100)#rank of student in top ten
+    rank=fields.Integer('Rank',default=-1)#rank of student in top ten
 
     @api.depends('order_ids')
     def compute_student_order(self):

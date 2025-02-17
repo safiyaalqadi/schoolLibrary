@@ -29,22 +29,6 @@ class LibraryBook(models.Model):
     total_price_history=fields.Float(string="Daily borrow Price",compute='_compute_history_price',store=True,default=0)
     order = fields.Integer('Order', default=-1)
 
-
-
-    @api.model
-    def search(self, args, offset=0, limit=None, order=None, count=False):
-        if limit == 10 and 'total_price_history desc' in order:
-            args.append(('total_price_history', '>', 0))
-        return super(LibraryBook, self).search(args, offset, limit, order, count)
-
-    @api.model
-    def get_top_10_books_ids(self):
-        top_10_books = self.env['library.book'].search([], order='total_price_history', limit=10)
-        if top_10_books:
-            return top_10_books
-        else:
-            return []
-
     @api.depends('order_line_ids')
     def _compute_history_price(self):
        for record in self:
