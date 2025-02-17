@@ -1,10 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
+
+     <record id="view_library_book_search" model="ir.ui.view">
+        <field name="name">library.book.search</field>
+        <field name="model">library.book</field>
+        <field name="arch" type="xml">
+            <search string="Search Books">
+                <field name="name" string="Book Title"/>
+                <field name="available_copies" string="Available"  />
+                <field name="total_price_history" string="Total Price"/>
+                <field name="order" string="Order"/>
+                   <filter name="filter_top_ten_books" string="Top 10 Books"
+                        domain="[('order','>',0)]"
+                        />
+            </search>
+
+        </field>
+
+
+    </record>
+
     <record id="view_library_book_form" model="ir.ui.view">
         <field name="name">library.book.form</field>
         <field name="model">library.book</field>
         <field name="arch" type="xml">
-
             <form string="Book">
 
                 <sheet>
@@ -68,13 +87,16 @@
         <field name="name">library.book.tree</field>
         <field name="model">library.book</field>
         <field name="arch" type="xml">
-            <tree string="Books">
+            <tree string="Books" >
+                <field name="order" string="Order " readonly="1"/>
                 <field name="name" string="Book Title" required="1"/>
                 <field name="author_id" string="Author" required="1"/>
                 <field name="isbn" string="ISBN"/>
                 <field name="available_copies" string="Available Copies" required="1"/>
                 <field name="published_date" string="Publish Date" required="1"/>
                 <field name="category_id" string="Category" required="1"/>
+                <field name="total_price_history" string="Total history"  widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1"/>
+                <field name="currency_id" string="currency"  invisible="1" />
                 <field name="order_line_ids" string="Orders" />
                 <field name="status" string="status"  widget="badge"
                 decoration-success="status == 'available'"
@@ -83,6 +105,8 @@
             </tree>
         </field>
     </record>
+
+
 </odoo>
 
 

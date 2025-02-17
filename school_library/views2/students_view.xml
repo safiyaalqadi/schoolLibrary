@@ -7,6 +7,11 @@
             <search string="Search Students">
                 <field name="name" string="Student Name"/>
                 <field name="email" string="email"/>
+                <field name="rank" string="rank"/>
+                 <filter name="filter_top_ten_student"
+                         string="Top 10 student"
+                         domain="[('rank','&lt;',100)]"
+                 />
             </search>
         </field>
     </record>
@@ -36,6 +41,8 @@
         <field name="model">library.students</field>
         <field name="arch" type="xml">
             <tree string="Students">
+                        <field name="order" string="Total student order history" />
+                        <field name="rank" string="rank"/>
                         <field name="name" string="Student Name" />
                         <field name="user_id" string="User" widget="many2one_avatar_user"/>
                         <field name="email" string="email" widget="email" />

@@ -48,4 +48,21 @@
                   parent="menu_library"
                   action="action_library_book_return_report"
                   sequence="5"/>
+
+    <menuitem id="menu_library_top"
+              name="Top"
+              parent="menu_library"
+              sequence="10"
+              />
+
+     <menuitem id="menu_top_ten_Books"
+               name="Top Ten Books"
+               action="action_top_ten_books"
+               parent="menu_library_top"/>
+
+    <menuitem id="menu_top_ten_Student"
+               name="Top Ten Student"
+               action="action_top_ten_student"
+               parent="menu_library_top"/>
+
 </odoo>

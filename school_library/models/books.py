@@ -2,6 +2,7 @@ from odoo import api,models, fields
 from odoo.exceptions import ValidationError
 import re
 
+from odoo.odoo.tools.populate import compute
 class LibraryBook(models.Model):
     _name = 'library.book'
     _description = 'Library Book'
@@ -25,12 +26,36 @@ class LibraryBook(models.Model):
     ], string='Status', default='available',compute='_compute_status')
     daily_price=fields.Float(string="Daily borrow Price",compute='_compute_daily_price')
     currency_id = fields.Many2one('res.currency', string="Currency", default=lambda self: self.env.company.currency_id)
-    total_price_history=fields.Float(string="Daily borrow Price",compute='_compute_history_price')
+    total_price_history=fields.Float(string="Daily borrow Price",compute='_compute_history_price',store=True,default=0)
+    order = fields.Integer('Order', default=-1)
+
+
+
+    @api.model
+    def search(self, args, offset=0, limit=None, order=None, count=False):
+        if limit == 10 and 'total_price_history desc' in order:
+            args.append(('total_price_history', '>', 0))
+        return super(LibraryBook, self).search(args, offset, limit, order, count)
+
+    @api.model
+    def get_top_10_books_ids(self):
+        top_10_books = self.env['library.book'].search([], order='total_price_history', limit=10)
+        if top_10_books:
+            return top_10_books
+        else:
+            return []
 
     @api.depends('order_line_ids')
     def _compute_history_price(self):
        for record in self:
-           self.total_price_history = sum(line.total_price_in_order for line in record.order_line_ids)
+           record.total_price_history = sum(line.total_price_in_order for line in record.order_line_ids)
+           books_ordered = record.search([], order='total_price_history desc', limit=10)
+           if books_ordered :
+              for idx, book in enumerate(books_ordered):
+                  book.order = idx + 1
+              all_books = self.search([('id', 'not in', books_ordered.ids)])
+              all_books.write({'order': 0})
+
 
     @api.depends('category_id')
     def _compute_daily_price(self):

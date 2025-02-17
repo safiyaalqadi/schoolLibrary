@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="action_top_ten_student" model="ir.actions.act_window">
+        <field name="name">Top Ten Student</field>
+        <field name="res_model">library.students</field>
+        <field name="view_mode">tree</field>
+        <field name="target">new</field>
+        <field name="context" >
+            {'default_order': 'rank desc'}
+        </field>
+        <field name="limit">10</field>
+    </record>
+</odoo>

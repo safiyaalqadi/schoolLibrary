@@ -6,6 +6,7 @@
     'summary': 'This app helps manage library books, student borrowing, and inventory. Features include book tracking, student management, and real-time updates on available books and overdue items..',
     'depends': ['mail'],
     'data':[
+
           'security/security.xml',
           'security/ir.model.access.csv',
           'views2/books_view.xml',
@@ -23,6 +24,8 @@
           'actions/order_line_action.xml',
           'actions/author_action.xml',
           'actions/report_returnd_weekly.xml',
+          'actions/top_ten_books.xml',
+          'actions/top_ten_student.xml',
           'views2/order_calnedar.xml',
           'views2/library_menu.xml',
          'report/report_returnd_weekly.xml',
