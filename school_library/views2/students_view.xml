@@ -10,7 +10,7 @@
                 <field name="rank" string="rank"/>
                  <filter name="filter_top_ten_student"
                          string="Top 10 student"
-                         domain="[('rank','&lt;',100)]"
+                         domain="[('rank', '>', 0),('rank','&lt;',11)]"
                  />
             </search>
         </field>
@@ -27,6 +27,13 @@
                         <field name="phone" string="phone" required="1" widget="phone"/>
                         <field name="address" string="address " required="1"/>
                         <field name="user_id" string="user"  required="1"/>
+                        <field name="partner_id" required="1"/>
+                        <field name="rank" invisible="1"/>
+                        <field name="total_Student"  widget="monetary" string="Total" options="{'currency_field': 'currency_id'}" readonly="1"/>
+                        <field name="total_Student_after_discount"  widget="monetary"  options="{'currency_field': 'currency_id'}" readonly="1"/>
+                        <field name="currency_id" string="currency"  invisible="1" />
+                         <field name="special_discount"
+                           attrs="{'invisible': ['|', ('rank', '&lt;', 1), ('rank', '&gt;', 10)]}"/>
                     </group>
                 </sheet>
                 <div class="oe_chatter">
@@ -41,7 +48,7 @@
         <field name="model">library.students</field>
         <field name="arch" type="xml">
             <tree string="Students">
-                        <field name="order" string="Total student order history" />
+                        <field name="order" string="Total Books Order" readonly="1"/>
                         <field name="rank" string="rank"/>
                         <field name="name" string="Student Name" />
                         <field name="user_id" string="User" widget="many2one_avatar_user"/>

@@ -6,18 +6,23 @@
         <field name="arch" type="xml">
             <form string="Orders Line">
                 <sheet>
-                     <group>
+
+                     <group >
                         <field name="status" widget="statusbar" statusbar_visible="draft,borrowed,returned,overdue"/>
                      </group>
-                     <group>
+                     <group string="order details">
                       <field name="students_id" string="student Name" requerd="1"/>
                       <field name="order_date" string="Order Date" readonly="1"/>
                       <field name="return_date" string="Return Date" groups="school_library.group_librarian"/>
-                      <field name="order_line_ids" string="Order Line Ids" />
+                      <field name="order_line_ids" string="Order Line Ids" attrs="{'readonly': [('status', '=', 'returned')]}"/>
                       <field name="total_books_borrowed" readonly="1"/>
-                       <field name="total_price"  widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1"/>
-                         <field name="currency_id" string="currency"  invisible="1" />
-                        <field name="total_days" readonly="1"/>
+                       <field name="total_price"  widget="monetary" attrs="{'invisible': [('status', '!=', 'returned')]}" options="{'currency_field': 'currency_id'}" readonly="1"/>
+                       <field name="total_price_after_disc"  widget="monetary" attrs="{'invisible': [('status', '!=', 'returned')]}" options="{'currency_field': 'currency_id'}" readonly="1"/>
+                        <field name="currency_id" string="currency"  invisible="1" />
+                        <field name="total_days" readonly="1" attrs="{'invisible': [('status', '!=', 'returned')]}"/>
+                    </group>
+                    <group string="Print order details" attrs="{'invisible': [('status', '!=', 'returned')]}">
+                         <button name="print_invoice" type="object" string="print" help="print invoice" class="btn-primary"  icon="fa-solid fa-print"/>
                     </group>
                   </sheet>
                  <div class="oe_chatter">
@@ -44,7 +49,7 @@
                 />
                 <field name="order_line_ids" string="Order Line Ids"/>
                 <field name="total_price"  widget="monetary" options="{'currency_field': 'currency_id'}" readonly="1"/>
-                  <field name="currency_id" string="currency"  invisible="1" />
+                <field name="currency_id" string="currency"  invisible="1" />
 
             </tree>
         </field>

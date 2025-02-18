@@ -22,8 +22,23 @@
                         <field name="name" string="Category Name" required="1"/>
                          <field name="description" string="description"/>
                         <field name="daily_price" string ="Daily Price" widget="monetary" options="{'currency_field': 'currency_id'}"/>
-                       <field name="currency_id"/>
+                        <field name="currency_id"/>
+
                     </group>
+                     <notebook>
+                            <page string="Book Details">
+                          <field name="book_ids" readonly="1">
+                        <tree>
+
+                            <field name="name" />
+                          <field name="status" string="status"  widget="badge"
+                            decoration-success="status == 'available'"
+                            decoration-warning="status == 'borrowed'"
+                            decoration-danger="status == 'out_of_stock'"/>
+                        </tree>
+                         </field>
+                        </page>
+                        </notebook>
                 </sheet>
                   <div class="oe_chatter">
                     <field name="message_follower_ids" widget="mail_followers" class="oe_chatter_followers"/>

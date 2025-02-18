@@ -1,8 +1,10 @@
+import datetime
+
 from odoo import api,models, fields
 from odoo.exceptions import ValidationError
 import re
-
 from odoo.odoo.tools.populate import compute
+
 class LibraryBook(models.Model):
     _name = 'library.book'
     _description = 'Library Book'
@@ -28,6 +30,36 @@ class LibraryBook(models.Model):
     currency_id = fields.Many2one('res.currency', string="Currency", default=lambda self: self.env.company.currency_id)
     total_price_history=fields.Float(string="Daily borrow Price",compute='_compute_history_price',store=True,default=0)
     order = fields.Integer('Order', default=-1)
+    product_id = fields.Many2one('product.product', string="Product")
+
+    @api.model
+    def create(self, vals):
+        if 'product_id' not in vals:
+            product_vals = {
+                'name': vals.get('name'),
+                'type': 'service',
+                'list_price': vals.get('daily_price', 0.0),
+                'default_code': vals.get('isbn', ''),
+                'description': vals.get('description', ''),
+                'categ_id':self.env.ref('product.product_category_all').id,
+                'currency_id': vals.get('currency_id', self.env.company.currency_id.id),
+            }
+
+            existing_product_template = self.env['product.template'].search([
+                ('name', '=', vals.get('name')),
+                ('default_code', '=', vals.get('isbn'))
+            ], limit=1)
+            if existing_product_template:
+                product = self.env['product.product'].search([
+                    ('product_tmpl_id', '=', existing_product_template.id)
+                ], limit=1)
+                vals['product_id'] = product.id
+            else:
+              product = self.env['product.product'].create(product_vals)
+              vals['product_id'] = product.id
+
+        return super(LibraryBook, self).create(vals)
+
 
     @api.depends('order_line_ids')
     def _compute_history_price(self):
@@ -39,7 +71,6 @@ class LibraryBook(models.Model):
                   book.order = idx + 1
               all_books = self.search([('id', 'not in', books_ordered.ids)])
               all_books.write({'order': 0})
-
 
     @api.depends('category_id')
     def _compute_daily_price(self):
@@ -87,3 +118,8 @@ class LibraryBook(models.Model):
                 raise ValidationError("The ISBN number is not valid. Please enter a valid ISBN-10 or ISBN-13.")
 
 
+    @api.constrains('published_date')
+    def _check_date(self):
+        for record in self:
+           if record.published_date>= datetime.date.today():
+               raise ValidationError("Publish date can't be in future")

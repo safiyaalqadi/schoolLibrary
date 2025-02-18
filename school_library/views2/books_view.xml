@@ -7,11 +7,12 @@
         <field name="arch" type="xml">
             <search string="Search Books">
                 <field name="name" string="Book Title"/>
+
                 <field name="available_copies" string="Available"  />
                 <field name="total_price_history" string="Total Price"/>
                 <field name="order" string="Order"/>
                    <filter name="filter_top_ten_books" string="Top 10 Books"
-                        domain="[('order','>',0)]"
+                        domain="[('order', '>', 0),('order','&lt;',11)]"
                         />
             </search>
 
@@ -58,7 +59,7 @@
                             </group>
                          </page>
                          <page  string="Order history">
-                             <field name="order_line_ids">
+                             <field name="order_line_ids" readonly="1">
                                <tree>
                                   <field name="order_id" string="Order Reference"/>
                                    <field name="book_id" string="Book"/>
@@ -102,6 +103,7 @@
                 decoration-success="status == 'available'"
                 decoration-warning="status == 'borrowed'"
                 decoration-danger="status == 'out_of_stock'"/>
+
             </tree>
         </field>
     </record>

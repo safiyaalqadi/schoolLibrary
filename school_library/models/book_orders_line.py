@@ -6,7 +6,7 @@ class LibraryBookOrderLine(models.Model):
     _description = 'Library Book Order Line'
     _inherit = ['mail.thread']
 
-    order_id = fields.Many2one('library.book.order', string="Order", required=True)
+    order_id = fields.Many2one('library.book.order', string="Order", required=True,ondelete='cascade')
     book_id = fields.Many2one('library.book', string="Book", required=True)
     quantity = fields.Integer(string="Quantity", default=1,tracking=True)
     total_price_per_day=fields.Float(string="Total Price Per day",compute="_compute_total_price_for_one_line",store=True)
