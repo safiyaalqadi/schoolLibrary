@@ -47,11 +47,9 @@ class LibraryBookOrder(models.Model):
       )
 
     def action_report(self):
-        self.invoice_date=fields.Datetime.now()
+        self.invoice_date = fields.Datetime.now()
         report_action = self.env.ref('school_library.action_report_library_order')
         return report_action.report_action(self)
-
-
 
 
     def print_invoice(self):

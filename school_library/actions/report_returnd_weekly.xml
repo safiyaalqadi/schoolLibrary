@@ -4,7 +4,7 @@
     <field name="name">Books Not Returned Report</field>
     <field name="model">library.book.return.report</field>
     <field name="report_type">qweb-pdf</field>
-    <field name="report_name">module_name.report_books_not_returned</field>
-    <field name="print_report_name">'Books Not Returned Report - ' + object.name</field>
+    <field name="report_name">school.library.report_books_not_returned</field>
+    <field name="print_report_name">'Books Not Returned Report - ' </field>
 </record>
 </odoo>

@@ -150,5 +150,7 @@
             <field name="groups" eval="[(4, ref('group_student'))]"/>
             <field name="domain_force">[('user_id.id', '=', user.id)]</field>  <!-- Students can only see their own record -->
         </record>
+
+
     </data>
 </odoo>

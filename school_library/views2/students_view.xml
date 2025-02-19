@@ -21,7 +21,9 @@
         <field name="arch" type="xml">
             <form string="Students">
                 <sheet>
-                    <group>
+                    <notebook>
+                        <page string="student information">
+                            <group>
                         <field name="name" string="Student Name" required="1"/>
                         <field name="email" string="email" required="1" widget="email"/>
                         <field name="phone" string="phone" required="1" widget="phone"/>
@@ -34,12 +36,20 @@
                         <field name="currency_id" string="currency"  invisible="1" />
                          <field name="special_discount"
                            attrs="{'invisible': ['|', ('rank', '&lt;', 1), ('rank', '&gt;', 10)]}"/>
-                    </group>
+                        </group>
+                        </page>
+                        <page string="Orders">
+     <field name="order_ids" string="Orders"  readonly="1"></field>
+</page>
+
+
+                    </notebook>
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids" widget="mail_followers" class="oe_chatter_followers"/>
                     <field name="message_ids" widget="mail_thread" class="oe_chatter_messages"/>
                 </div>
+
             </form>
         </field>
     </record>
