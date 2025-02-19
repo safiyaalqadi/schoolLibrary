@@ -10,6 +10,8 @@ class LibraryBookOrder(models.Model):
     students_id = fields.Many2one('library.students', string="Library student", tracking=True,required=True)
     order_date = fields.Datetime(string="Order Date", default=fields.Datetime.now,tracking=True)
     return_date = fields.Datetime(string="Return Date",tracking=True)
+    invoice_date = fields.Datetime(string="Invoice Date",default=fields.Datetime.now())
+
     total_price = fields.Float(string='Total Price', compute="_compute_total_price",store=True,default=0)
     total_price_after_disc = fields.Float(string='Total Price after discount ', compute="_compute_total_price",store=True,default=0)
     currency_id = fields.Many2one('res.currency', string="Currency", default=lambda self: self.env.company.currency_id)
@@ -43,6 +45,13 @@ class LibraryBookOrder(models.Model):
         index=True,
         default=lambda self: self.env['ir.sequence'].next_by_code('library.book.order.sequence')
       )
+
+    def action_report(self):
+        self.invoice_date=fields.Datetime.now()
+        report_action = self.env.ref('school_library.action_report_library_order')
+        return report_action.report_action(self)
+
+
 
 
     def print_invoice(self):

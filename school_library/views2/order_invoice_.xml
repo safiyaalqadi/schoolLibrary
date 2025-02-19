@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <template id="report_library_order_pdf">
+        <t t-foreach="docs" t-as="doc">
+              <t t-call="web.html_container">
+                <t t-call="web.external_layout">
+            <div class="page">
+                <h2>Library Book Order Report</h2>
+                <p><strong>Order Reference:</strong> <span t-field="doc.order_reference"/></p>
+                 <p><strong>Status:</strong> <span t-field="doc.status"/></p>
+                <p><strong>Student Name:</strong> <span t-field="doc.students_id.name"/></p>
+                <p><strong>Order Date:</strong> <span t-field="doc.order_date"/></p>
+                <p><strong>Return Date:</strong> <span t-field="doc.return_date"/></p>
+                <p><strong>Invoice Date:</strong> <span t-field="doc.invoice_date"/></p>
+
+                <t t-if="doc.order_line_ids">
+                    <h3>Books Ordered:</h3>
+                    <table class="table table-bordered mb64">
+                        <thead>
+                            <tr>
+                                <th>Book Title  </th>
+                                <th>Quantity  </th>
+                                <th>Price in day  </th>
+                                <th>Total Price in order  </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="doc.order_line_ids" t-as="line">
+                                <tr>
+                                    <td><span t-field="line.book_id.name"/></td> <!-- Assuming book_id is a Many2one -->
+                                    <td><span t-field="line.quantity"/></td>
+                                    <td><span t-field="line.total_price_per_day"/></td> <!-- Assuming price_unit is a field -->
+                                    <td><span t-field="line.total_price_in_order"/></td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                     <p><strong>Total Price:</strong> <span t-field="doc.total_price"/></p>
+                <p><strong>Total Price after Discount:</strong> <span t-field="doc.total_price_after_disc"/></p>
+                <p><strong>Currency:</strong> <span t-field="doc.currency_id.name"/></p>
+                <p><strong>Total Days:</strong> <span t-field="doc.total_days"/></p>
+
+                </t>
+            </div>
+        </t>
+         </t>
+        </t>
+    </template>
+    </data>
+</odoo>

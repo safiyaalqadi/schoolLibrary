@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<data>
+     <record id="action_report_library_order" model="ir.actions.report">
+    <field name="name">Library Order Report</field>
+    <field name="model">library.book.order</field>
+    <field name="report_name">school_library.report_library_order_pdf</field>
+    <field name="report_type">qweb-html</field>
+    <field name="print_report_name">"Library Order " </field>
+    </record>
+</data>
+</odoo>
+
+

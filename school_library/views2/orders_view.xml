@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <data>
     <record id="view_library_order_form" model="ir.ui.view">
         <field name="name">library.book.order.form</field>
         <field name="model">library.book.order</field>
@@ -22,7 +23,8 @@
                         <field name="total_days" readonly="1" attrs="{'invisible': [('status', '!=', 'returned')]}"/>
                     </group>
                     <group string="Print order details" attrs="{'invisible': [('status', '!=', 'returned')]}">
-                         <button name="print_invoice" type="object" string="print" help="print invoice" class="btn-primary"  icon="fa-solid fa-print"/>
+                         <button name="print_invoice" type="object" string="invoice" help="print invoice" invisible="1" class="btn-primary"  icon="fa-solid fa-print"/>
+                         <button name="action_report" type="object" string="print invoice" help="print action" class="btn-primary"  icon="fa-solid fa-print"/>
                     </group>
                   </sheet>
                  <div class="oe_chatter">
@@ -54,4 +56,12 @@
             </tree>
         </field>
     </record>
+     <record id="action_library_order_print" model="ir.actions.act_window">
+    <field name="name">Orders</field>
+    <field name="res_model">library.book.order</field>
+    <field name="view_mode">form</field>
+    <field name="view_id" ref="view_library_order_form"/>
+
+    </record>
+    </data>
 </odoo>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+    <data>
 <template id="report_books_not_returned" name="Books Not Returned Report">
     <t t-foreach="docs" t-as="order">
         <div>
@@ -16,4 +17,5 @@
         </div>
     </t>
 </template>
+    </data>
 </odoo>

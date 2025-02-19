@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+<data>
 <record id="action_library_order" model="ir.actions.act_window">
     <field name="name">Orders</field>
     <field name="res_model">library.book.order</field>
@@ -14,5 +15,6 @@
     <field name="view_mode">calendar</field>
 </record>
 
+</data>
 
 </odoo>

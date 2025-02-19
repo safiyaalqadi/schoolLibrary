@@ -9,3 +9,4 @@ class CustomInvoice(models.Model):
     total_days=fields.Float(string='Total days',default=0)
     total_price = fields.Float(string='Total Price', default=0)#sum of all
 
+

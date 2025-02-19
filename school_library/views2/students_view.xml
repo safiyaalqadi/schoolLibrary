@@ -48,8 +48,8 @@
         <field name="model">library.students</field>
         <field name="arch" type="xml">
             <tree string="Students">
-                        <field name="order" string="Total Books Order" readonly="1"/>
-                        <field name="rank" string="rank"/>
+                        <field name="order" string="Total Books Order" invisible="1" readonly="1"/>
+                        <field name="rank" string="rank" attrs="{'invisible': [('rank', '&gt;', 10)]}"/>
                         <field name="name" string="Student Name" />
                         <field name="user_id" string="User" widget="many2one_avatar_user"/>
                         <field name="email" string="email" widget="email" />
