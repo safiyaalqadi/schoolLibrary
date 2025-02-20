@@ -86,6 +86,7 @@ class AccountMoveLine(models.Model):
         check_company=True,
         tracking=True,
     )
+
     name = fields.Char(
         string='Label',
         compute='_compute_name', store=True, readonly=False, precompute=True,
