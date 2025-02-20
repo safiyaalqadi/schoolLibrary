@@ -56,6 +56,7 @@
                             </group>
                          </page>
                          <page  string="Order history">
+                             <group>
                              <field name="order_line_ids" readonly="1">
                                <tree>
                                   <field name="order_id" string="Order Reference"/>
@@ -64,9 +65,11 @@
                                    <field name="total_price_per_day" string="Total Price Per day" readonly="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
                                    <field name="currency_id" string="currency" invisible="1"/>
                                    <field name="total_price_in_order" string="Total in order" readonly="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                   <field name="discount" string="Discount" readonly="1" widget="percentage" ></field>
                               </tree>
                              </field>
-                             <field  name="total_price_history" string="Total Borrowed Cost "  readonly="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                             <field name="total_price_history" string="Total Borrowed Cost "  readonly="1" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                         </group>
                          </page>
                      </notebook>
                 </sheet>

@@ -34,7 +34,7 @@
                         <field name="total_Student"  widget="monetary" string="Total" options="{'currency_field': 'currency_id'}" readonly="1"/>
                         <field name="total_Student_after_discount"  widget="monetary"  options="{'currency_field': 'currency_id'}" readonly="1"/>
                         <field name="currency_id" string="currency"  invisible="1" />
-                         <field name="special_discount"
+                         <field name="special_discount" widget="percentage"
                            attrs="{'invisible': ['|', ('rank', '&lt;', 1), ('rank', '&gt;', 10)]}"/>
                         </group>
                         </page>

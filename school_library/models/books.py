@@ -64,7 +64,7 @@ class LibraryBook(models.Model):
     @api.depends('order_line_ids')
     def _compute_history_price(self):
        for record in self:
-           record.total_price_history = sum((line.total_price_in_order-(line.total_price_in_order * (line.order_id.students_id.special_discount/100))) for line in record.order_line_ids)
+           record.total_price_history = sum((line.total_price_in_order-(line.total_price_in_order * (line.order_id.students_id.special_discount))) for line in record.order_line_ids)
            books_ordered = record.search([], order='total_price_history desc', limit=10)
            if books_ordered :
               for idx, book in enumerate(books_ordered):

@@ -31,13 +31,13 @@ class LibraryMember(models.Model):
     def _compute_special_discount(self):
         for record in self:
             if 1 <= record.rank <= 10:
-                record.special_discount = 20.0
+                record.special_discount = 0.2
 
             else:
                 record.special_discount = 0.0
         record.total_Student_after_discount = (
                 record.total_Student -
-                (record.total_Student * record.special_discount / 100)
+                (record.total_Student * record.special_discount)
                                                )
 
     @api.depends('order_ids')

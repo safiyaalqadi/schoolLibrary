@@ -1,3 +1,5 @@
+from email.policy import default
+
 from odoo import api,models, fields
 from odoo.exceptions import ValidationError
 
@@ -12,6 +14,12 @@ class LibraryBookOrderLine(models.Model):
     total_price_per_day=fields.Float(string="Total Price Per day",compute="_compute_total_price_for_one_line",store=True)
     currency_id = fields.Many2one('res.currency', string="Currency", default=lambda self: self.env.company.currency_id)
     total_price_in_order=fields.Float(string="Total Price in order",compute="_check_total_for_each_line",default=0)
+    discount=fields.Float(string="Discount",compute="_compute_student_discount",default=0)
+
+    @api.depends('order_id')
+    def _compute_student_discount(self):
+        for order in self:
+          order.discount= order.order_id.students_id.special_discount
 
     @api.depends('order_id')
     def _check_total_for_each_line(self):

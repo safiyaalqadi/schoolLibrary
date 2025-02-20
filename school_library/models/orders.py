@@ -15,7 +15,7 @@ class LibraryBookOrder(models.Model):
     total_price = fields.Float(string='Total Price', compute="_compute_total_price",store=True,default=0)
     total_price_after_disc = fields.Float(string='Total Price after discount ', compute="_compute_total_price",store=True,default=0)
     currency_id = fields.Many2one('res.currency', string="Currency", default=lambda self: self.env.company.currency_id)
-
+    discount=fields.Float(name="discount",string="Discount",compute="_compute_total_price",default=0)
     total_days=fields.Float(string='Total days', compute="_compute_total_price",default=0)
     status = fields.Selection([
         ('draft', 'Draft'),
@@ -92,7 +92,7 @@ class LibraryBookOrder(models.Model):
                 raise ValidationError("The return date cannot be earlier than the order date.")
             if record.order_date and (fields.Datetime.now() - record.order_date) > timedelta(days=15):
                 record.status = 'overdue'
-            elif  record.return_date :
+            elif record.return_date :
                 record.status = 'returned'
             elif not record.return_date and not (fields.Datetime.now() - record.order_date) > timedelta(days=15):
                 record.status = 'borrowed'
@@ -115,16 +115,19 @@ class LibraryBookOrder(models.Model):
           if order.return_date:
             order.total_days=(order.return_date - order.order_date).days
             order.total_price = sum(line.total_price_per_day for line in order.order_line_ids) *  order.total_days
-            order.total_price_after_disc=order.total_price - (order.total_price * order.students_id.special_discount/100)
+            order.total_price_after_disc=order.total_price - (order.total_price * order.students_id.special_discount)
+            order.discount=order.students_id.special_discount
           else:
             order.total_price=0
             order.total_days=0
+            order.discount=0
 
             # new task 1
     @api.depends('status')
     def _compute_status_bar(self):
-        for order in self:
+       for order in self:
             order.status_bar = order.status
+     #  self[0].statuse_bar=self[0].status
 
     @api.model
     def create(self, vals):
