@@ -61,7 +61,8 @@ class LibraryBookOrder(models.Model):
                 'name':lin.book_id.name,
                 'quantity':lin.quantity,
                 'price_unit':lin.book_id.daily_price,
-                'discount':self.students_id.special_discount
+                'discount':self.students_id.special_discount*100,
+                'subtotal_price_days':lin.total_price_in_order
             }))
 
         invoice_vals = {
@@ -71,7 +72,8 @@ class LibraryBookOrder(models.Model):
                 'invoice_line_ids': invoice_lines,
                 'currency_id': self.currency_id.id,
                 'amount_residual': self.total_price,
-
+                'order_date':self.order_date,
+                'return_date':self.return_date
             #when i am trying to add other fields it stop working
             }
         invoice = self.env['account.move'].create(invoice_vals)

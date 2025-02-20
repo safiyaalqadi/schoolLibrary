@@ -32,14 +32,12 @@ class LibraryMember(models.Model):
         for record in self:
             if 1 <= record.rank <= 10:
                 record.special_discount = 0.2
-
             else:
                 record.special_discount = 0.0
         record.total_Student_after_discount = (
                 record.total_Student -
                 (record.total_Student * record.special_discount)
                                                )
-
     @api.depends('order_ids')
     def compute_student_order(self):
         for record in self:
@@ -62,8 +60,6 @@ class LibraryMember(models.Model):
                     student.rank = idx + 1
                 else:
                     student.rank = 100
-
-
 
 
     @api.constrains('email')

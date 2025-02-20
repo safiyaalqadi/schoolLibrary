@@ -6,10 +6,17 @@
         <field name="model">library.book.order</field>
         <field name="arch" type="xml">
             <form string="Orders Line">
-                <sheet>
-                     <group >
+                <header>
+                         <button name="print_invoice" type="object" string="invoice" help="print invoice" invisible="0" class="btn-primary"  icon="fa-solid fa-print"/>
+                         <button name="action_report" type="object" string="print invoice" help="print action" class="btn-primary"  icon="fa-solid fa-print"/>
+
+
+
                         <field name="status" widget="statusbar" statusbar_visible="draft,borrowed,returned,overdue"/>
-                     </group>
+
+                </header>
+                <sheet>
+
                      <group string="order details">
                       <field name="students_id" string="student Name" requerd="1"/>
                       <field name="order_date" string="Order Date" readonly="1"/>
@@ -23,10 +30,7 @@
                         <field name="currency_id" string="currency"  invisible="1" />
 
                     </group>
-                    <group string="Print order details" attrs="{'invisible': [('status', '!=', 'returned')]}">
-                         <button name="print_invoice" type="object" string="invoice" help="print invoice" invisible="1" class="btn-primary"  icon="fa-solid fa-print"/>
-                         <button name="action_report" type="object" string="print invoice" help="print action" class="btn-primary"  icon="fa-solid fa-print"/>
-                    </group>
+
                   </sheet>
                  <div class="oe_chatter">
                     <field name="message_follower_ids" widget="mail_followers" class="oe_chatter_followers"/>
