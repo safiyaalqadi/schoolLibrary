@@ -17,9 +17,12 @@ class CustomInvoiceLine(models.Model):
     def _compute_totals_days(self):
         for record in self:
             if record.price_subtotal:
-              record.subtotal_price_days=record.price_subtotal*record.move_id.total_days
+              record.subtotal_price_days=record.price_subtotal
+              record.price_subtotal=record.price_subtotal*record.move_id.total_days
             else:
                 record.subtotal_price_days=0
+                record.price_subtotal =0
+
 
 
 

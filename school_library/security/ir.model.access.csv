@@ -16,3 +16,6 @@ access_library_order_line_student,access_library_order_line_student,model_librar
 
 access_library_student_librarian,access_library_student_librarian,model_library_students,group_librarian,1,1,1,1
 access_library_student_student,access_library_student_student,model_library_students,group_student,1,0,0,0
+
+access_account_move_line_custom,account.move.line.custom,model_account_move_line,base.group_user,1,1,1,1
+
