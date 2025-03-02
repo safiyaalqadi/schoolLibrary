@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="library_book_web_form" name="Author Submission Form">
+   <t t-call="website.layout">
+     <div class="container">
+        <form action="/submit_book" method="post">
+                    <div class="form-group">
+                        <label for="name">Book Name</label>
+                        <input type="text" id="name" name="name" class="form-control" required="required" placeholder="Enter book name" />
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">description</label>
+                        <textarea id="description" name="description" class="form-control" placeholder="Enter book  description"></textarea>
+                    </div>
+                     <div class="form-group">
+                        <label for="isbn">isbn</label>
+                        <input type="number" id="isbn" name="isbn" class="form-control" placeholder="Enter book isbn"></input>
+                    </div>
+                  <div class="form-group">
+                        <label for="pages">pages</label>
+                        <input type="number" id="pages" name="pages" class="form-control" placeholder="Enter book pages"></input>
+                    </div>
+                  <div class="form-group">
+                        <label for="available_copies">available copies</label>
+                        <input type="number" id="available_copies" name="available_copies" class="form-control" placeholder="Enter book available_copies"></input>
+                    </div>
+                 <div class="form-group">
+                        <label for="published_date">published  date</label>
+                        <input type="date" id="published_date" name="published_date" class="form-control" placeholder="Enter book published_date"></input>
+                    </div>
+
+
+           <t t-if="success">
+                <div class="alert alert-success">
+                    Author has been successfully created.
+                </div>
+            </t>
+            <t t-if="error">
+                <div class="alert alert-danger">
+                    <t t-esc="error" />
+                </div>
+             </t>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+   </t>
+</template>
+</odoo>

@@ -1,0 +1,34 @@
+<odoo>
+    <!-- Template to render the list of authors -->
+    <template id="library_authors_list" name="Authors List">
+        <div class="container">
+            <h1 class="my-4">Library Authors</h1>
+
+            <!-- Check if authors exist and render them -->
+            <t t-if="authors">
+                <div class="row">
+                    <!-- Loop through each author -->
+                    <t t-foreach="authors" t-as="author">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <!-- Author's name -->
+                                    <h5 class="card-title"><t t-esc="author.name"/></h5>
+                                    <!-- Author's biography -->
+                                    <p class="card-text">
+                                        <t t-esc="author.biography" />
+                                    </p>
+                                    <!-- You could add a link to each author's detailed page if desired -->
+                                    <a href="#" class="btn btn-primary">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </t>
+            <t t-else="">
+                <p>No authors found.</p>
+            </t>
+        </div>
+    </template>
+</odoo>
