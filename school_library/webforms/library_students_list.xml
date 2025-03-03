@@ -67,12 +67,7 @@
                         <h1> Students</h1>
                     </div>
                 </section>
-                <ul class="o_wevent_index_topbar_filters nav">
-                    <li class="nav-item dropdown me-2 my-1">
-                        <a role="button" class="btn dropdown-toggle" href="/top_students">top 10</a>
-                    </li>
 
-                </ul>
                  <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="/top_students" onclick="hideDropdown()">Top 10 Students</a></li>
             <li><a class="dropdown-item" href="/other_students" onclick="hideDropdown()">Other Students</a></li>
