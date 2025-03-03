@@ -5,8 +5,7 @@ from odoo.http import request
 class authorController(http.Controller):
 
     @http.route('/author_form', auth='public', website=True)
-    def render_auth_form(self, **kwargs):
-        #return "Hello word"
+    def render_auth_form(self ):
         return request.render('school_library.library_author_web_form',{'error': 'Name and Biography are required.'})
 
     @http.route('/submit_author', auth="public", website=True)
@@ -20,12 +19,11 @@ class authorController(http.Controller):
             'biography': biography,
           })
          return request.render('school_library.library_author_web_form',{'success':True})
-        #return "Hello word"
         except Exception as e:
          return request.render('school_library.library_author_web_form', {'error': str(e)})
 
     @http.route('/authors', auth='public', website=True)
-    def display_authors(self, **kwargs):
+    def display_authors(self):
         authors = request.env['library.author'].sudo().search([])
 
 

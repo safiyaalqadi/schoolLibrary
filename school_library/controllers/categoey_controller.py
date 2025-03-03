@@ -28,3 +28,11 @@ class categorycontroller(http.Controller):
 
         except Exception as e:
             return request.render('school_library.library_category_web_form',{'error': str(e)})
+
+    @http.route('/categories', auth='public', website=True)
+    def display_authors(self):
+        categories = request.env['library.book.category'].sudo().search([])
+
+        return request.render('school_library.library_categories_list', {
+            'categories': categories
+        })

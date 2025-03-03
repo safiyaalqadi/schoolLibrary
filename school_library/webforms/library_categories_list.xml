@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="library_categories_list">
+        <t t-call="website.layout">
+            <t t-set="head">
+                <meta t-if="search_tags" name="robots" content="none"/>
+            </t>
+
+            <t t-raw="0">
+                <style>
+                    /* Basic styling for the card */
+                    .o_card {
+                        border: 1px solid #ddd;
+                        border-radius: 10px;
+                        overflow: hidden;
+                        transition: box-shadow 0.3s ease, transform 0.3s ease; /* Smooth transition for shadow and scaling */
+                        background-color: #fff; /* Default background color */
+                    }
+
+                    /* Styling for the header of the card */
+                    .o_card_header {
+                        background-color: #f8f9fa;
+                        padding: 10px;
+                        font-size: 1.2em;
+                        font-weight: bold;
+                        text-align: center;
+                    }
+
+                    /* Styling for the body of the card */
+                    .o_card_body {
+                        padding: 15px;
+                        background-color: #fff;
+                        border-top: 1px solid #eee;
+                    }
+
+                    /* Hover effect for the card */
+                    .o_card:hover {
+                        box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2); /* Bigger shadow on hover */
+                        transform: translateY(-5px);  /* Lift the card a bit */
+                    }
+
+                    /* Background for each card */
+                    .o_card_background {
+                        background-image: url('/web/image/website.s_banner_default_image');
+                        background-position: center;
+                        background-size: cover;
+                        background-repeat: no-repeat;
+                        height: 150px;  /* Set a fixed height for the background image */
+                        border-radius: 10px 10px 0 0;
+                    }
+
+                    /* When hovering over the background image, adjust it */
+                    .o_card:hover .o_card_background {
+                        transform: scale(1.1); /* Slight zoom effect on hover */
+                        transition: transform 0.3s ease;
+                    }
+                </style>
+            </t>
+
+            <div class="oe_structure">
+                <section class="s_title parallax s_parallax_is_fixed bg-black-50 pt24 pb24" data-vcss="001" data-snippet="s_title"
+                         data-scroll-background-ratio="1" data-name="Title">
+                    <span class="s_parallax_bg oe_img_bg" style="background-image: url('/web/image/website.s_banner_default_image'); background-position: 50% 0;"
+                          />
+
+                    <div class="o_we_bg_filter bg-black-50"/>
+                    <div class="container">
+                        <h1> Categories</h1>
+                    </div>
+                </section>
+            </div>
+
+
+            <div class="o_wevent_events_list0">
+                <div class="container">
+                    <div class="row">
+                        <t t-foreach="categories" t-as="category">
+                            <div class="col-md-6 col-lg-4 mb-4">
+                                <div class="o_card o_card_1 o_card_shadow border p-3">
+
+                                    <div class="o_card_background"></div>
+                                    <div class="o_card_header">
+                                        <h4 class="o_card_title"><t t-esc="category.name"/></h4>
+                                    </div>
+                                    <div class="o_card_body">
+                                        <p><strong>Description: </strong><t t-esc="category.description"/></p>
+                                    </div>
+                                    <div class="o_card_body">
+                                        <p><strong>Daily Price: </strong><t t-esc="category.daily_price"/></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

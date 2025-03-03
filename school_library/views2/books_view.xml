@@ -41,6 +41,7 @@
                               <field name="name" string="Book Title" required="1"/>
                               <field name="isbn" string="ISBN" help="Enter the unique ISBN number for the book"/>
                               <field name="published_date" string="Publish Date" required="1"/>
+                                  <field name="pages" string="Pages" />
                              </group>
                          <group name="Book_Authors_category" string="Authors and Category">
                                 <field name="author_id" string="Author" required="1"/>

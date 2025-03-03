@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="library_books_list">
+        <t t-call="website.layout">
+            <div class="s_three_columns o_cc o_cc2 pt32 pb32 o_colored_level">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="sidebar p-4 bg-light rounded">
+                            <h4 class="mb-3">Filter by Category</h4>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <a href="#" class="category-filter" t-att-href="'/books'">All</a>
+                                </li>
+                                <t t-foreach="categories" t-as="category">
+                                    <li class="list-group-item">
+                                        <a href="#" class="category-filter" t-att-href="'/filter_books?category_id=' + str(category.id)">
+                                            <t t-esc="category.name"/>
+                                        </a>
+                                    </li>
+                                </t>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="col-md-9">
+
+                        <t t-if="not books">
+                            <div class="col-12">
+                                <div class="alert alert-light text-center">
+                                    <p class="m-0">No books found.</p>
+                                </div>
+                            </div>
+                        </t>
+
+
+                        <div class="row">
+                            <t t-foreach="books" t-as="book">
+                                <div class="col-md-4 col-lg-3 mb-4">
+                                    <div class="card text-bg-light h-100 border-0 shadow-lg o_card_shadow">
+                                        <div class="o_card_background" style="background-image: url('/web/image/book.cover_image'); background-size: cover; background-position: center; height: 200px; border-radius: 10px 10px 0 0;"></div>
+                                        <div class="o_card_body p-4">
+                                            <h4 class="o_card_title text-center mb-3" style="font-size: 1.25rem; font-weight: bold; color: #333;">
+                                                <t t-esc="book.name"/>
+                                            </h4>
+                                            <div class="book-info">
+                                                <p><strong>Author:</strong> <t t-esc="book.author_id.name"/></p>
+                                                <p><strong>Category:</strong> <t t-esc="book.category_id.name"/></p>
+                                                <p><strong>Pages:</strong> <t t-esc="book.pages"/></p>
+                                                <p><strong>Daily Price :</strong> <t t-esc="book.daily_price"/></p>
+                                            </div>
+                                            <div class="text-center mt-3">
+                                                <a href="/book_details" t-att-href="'/book_details?book=' + str(book.id)" class="btn btn-primary btn-sm">View Details</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+   <template id="library_books_details">
+        <t t-call="website.layout">
+            <t t-foreach="book" t-as="book">
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <div class="card text-bg-light h-100 border-0 shadow-lg o_card_shadow">
+                            <div class="o_card_background"
+                                 style="background-image: url('/web/image/book.cover_image');
+                                        background-size: cover;
+                                        background-position: center;
+                                        height: 300px;
+                                        border-radius: 10px;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card text-bg-light h-100 border-0 shadow-lg o_card_shadow">
+                            <div class="o_card_body p-4">
+                                <h4 class="o_card_title mb-3" style="font-size: 1.75rem; font-weight: bold; color: #333;">
+                                    <t t-esc="book.name"/>
+                                </h4>
+                                <div class="book-info">
+                                    <p><strong>ISBN:</strong> <t t-esc="book.isbn"/></p>
+                                    <p><strong>Author:</strong> <t t-esc="book.author_id.name"/></p>
+                                    <p><strong>Category:</strong> <t t-esc="book.category_id.name"/></p>
+                                    <p><strong>Published Date:</strong> <t t-esc="book.published_date"/></p>
+                                    <p><strong>Pages:</strong> <t t-esc="book.pages"/></p>
+                                    <p><strong>Available Copies:</strong> <t t-esc="book.available_copies_to_order"/></p>
+                                    <p><strong>Daily Price :</strong> <t t-esc="book.daily_price"/></p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </t>
+    </template>
+</odoo>

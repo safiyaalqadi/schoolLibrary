@@ -9,6 +9,9 @@
           'security/security.xml',
           'webforms/author_web_form.xml',
           'webforms/category_web_form.xml',
+          'webforms/library_categories_list.xml',
+          'webforms/library_students_list.xml',
+          'webforms/library_books_list.xml',
           'webforms/book_web_form.xml',
           'webforms/library_authors_list.xml',
           'security/ir.model.access.csv',
@@ -38,6 +41,11 @@
           'actions/top_ten_student.xml',
           'actions/order_invoice_action.xml',
     ],
+'assets': {
+   'web._assets_primary_variables': [
+      ('prepend', 'school_library/static/src/scss/primary_variables.scss'),
+   ],
+},
    'installable': True,
    'application': True,
 }

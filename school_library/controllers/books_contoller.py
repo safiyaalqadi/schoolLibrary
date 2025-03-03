@@ -8,8 +8,18 @@ class BookController(http.Controller):
     def render_auth_form(self, **kwargs):
         return request.render('school_library.library_book_web_form',{'error': 'All fields are required.'})
 
+    @http.route('/books', auth='public', website=True)
+    def display_books(self):
+        books = request.env['library.book'].sudo().search([])
+        categories=request.env['library.book.category'].search([])
+
+        return request.render('school_library.library_books_list', {
+            'books': books,
+            'categories': categories
+        })
+
     @http.route('/submit_book', auth="public", website=True)
-    def save_author(self, **kwargs):
+    def save_Book(self, **kwargs):
       try:
          name = kwargs.get('name')
          isbn = kwargs.get('isbn')
@@ -38,5 +48,27 @@ class BookController(http.Controller):
       except Exception as e:
          return request.render('school_library.library_book_web_form', {'error': str(e)})
 
+    @http.route('/filter_books', auth="public", website=True)
+    def filter_books(self, category_id=None):
+        domain = []
+        if category_id:
+            domain = [('category_id.id', '=', int(category_id))]
 
+        books = request.env['library.book'].search(domain)
+
+        return request.render('school_library.library_books_list', {
+            'books': books,
+            'categories': request.env['library.book.category'].search([]),
+        })
+
+    @http.route('/book_details',auth="public",website=True)
+    def display_book(self,book):
+        domain = []
+        if book:
+            domain = [('id', '=', int(book))]
+        book_d = request.env['library.book'].search(domain)
+        return request.render('school_library.library_books_details', {
+            'book': book_d,
+
+        })
 
