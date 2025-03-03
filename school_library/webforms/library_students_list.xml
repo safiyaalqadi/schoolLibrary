@@ -112,12 +112,53 @@
                                     <div class="o_card_body">
                                         <p><strong>Special Discount: </strong><t t-esc="student.special_discount"/></p>
                                     </div>
+                                    <div class="text-center mt-3">
+                                                <a href="/student_details" t-att-href="'/student_details?student=' + str(student.id)" class="btn btn-primary btn-sm">View Details</a>
+                                    </div>
                                 </div>
                             </div>
                         </t>
                     </div>
                 </div>
             </div>
+        </t>
+    </template>
+
+    <template id="library_student_details">
+        <t t-call="website.layout">
+            <t t-if="student" >
+                <div class="row mb-4">
+                    <div class="col-md-4">
+                        <div class="card text-bg-light h-100 border-0 shadow-lg o_card_shadow">
+                            <div class="o_card_background"
+                                 style="background-image: url('/web/image/book.cover_image');
+                                        background-size: cover;
+                                        background-position: center;
+                                        height: 300px;
+                                        border-radius: 10px;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card text-bg-light h-100 border-0 shadow-lg o_card_shadow">
+                            <div class="o_card_body p-4">
+                                <h4 class="o_card_title mb-3" style="font-size: 1.75rem; font-weight: bold; color: #333;">
+                                    <t t-esc="student.name"/>
+                                </h4>
+                                <div class="student-info">
+                                    <p><strong>Email:</strong> <t t-esc="student.email"/></p>
+                                    <p><strong>Name:</strong> <t t-esc="student.name"/></p>
+                                    <p><strong>Phone:</strong> <t t-esc="student.phone"/></p>
+                                    <p><strong>Address:</strong> <t t-esc="student.address"/></p>
+                                    <p><strong>Rank:</strong> <t t-esc="student.rank"/></p>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
         </t>
     </template>
 </odoo>

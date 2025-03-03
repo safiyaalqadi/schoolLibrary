@@ -19,3 +19,14 @@ class studentController(http.Controller):
         return request.render('school_library.library_students_list', {
             'students': students
         })
+
+    @http.route('/student_details', auth="public", website=True)
+    def display_student(self, student):
+        domain = []
+        if student:
+            domain = [('id', '=', int(student))]
+        student_d = request.env['library.students'].search(domain)
+        return request.render('school_library.library_student_details', {
+            'student': student_d,
+
+        })

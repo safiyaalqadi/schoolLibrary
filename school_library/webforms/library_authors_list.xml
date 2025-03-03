@@ -7,22 +7,16 @@
                 <div class="row">
                     <t t-foreach="authors" t-as="author">
                         <div class="col-12 col-md-4 mb-4">
-                            <!-- Author Card -->
                             <div class="card o_card_shadow border-0 rounded-lg">
-                                <!-- Author's Image -->
-
                                 <div class="o_card_body p-4">
-                                    <!-- Author's Name -->
                                     <h4 class="o_card_title text-center mb-3" style="font-size: 1.25rem; font-weight: bold; color: #333;">
                                         <t t-esc="author.name"/>
                                     </h4>
-                                    <!-- Author's Biography -->
                                     <p class="author-bio" style="font-size: 1rem; color: #555; text-align: justify; line-height: 1.6;">
                                         <t t-esc="author.biography"/>
                                     </p>
-                                    <!-- Optional Link to Author's Details -->
                                     <div class="text-center mt-3">
-                                        <a href="#" class="btn btn-primary btn-sm">View Author</a>
+                                        <a href="/author_books" class="btn btn-primary btn-sm" t-att-href="'/author_books?author_id=' + str(author.id)">View Author Books</a>
                                     </div>
                                 </div>
                             </div>

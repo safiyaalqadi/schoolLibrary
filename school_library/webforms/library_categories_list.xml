@@ -87,7 +87,11 @@
                                     </div>
                                     <div class="o_card_body">
                                         <p><strong>Daily Price: </strong><t t-esc="category.daily_price"/></p>
+                                     <a href="#" type="button" class="category-filter" t-att-href="'/filter_books?category_id=' + str(category.id)">
+                                            show books in <t t-esc="category.name"/>
+                                        </a>
                                     </div>
+
                                 </div>
                             </div>
                         </t>

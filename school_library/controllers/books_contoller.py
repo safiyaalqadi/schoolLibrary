@@ -72,3 +72,16 @@ class BookController(http.Controller):
 
         })
 
+    @http.route('/author_books', auth="public", website=True)
+    def filter_authors_books(self, author_id=None):
+        domain = []
+        if author_id:
+            domain = [('author_id.id', '=', int(author_id))]
+
+        books = request.env['library.book'].search(domain)
+
+        return request.render('school_library.library_books_list', {
+            'books': books,
+            'categories': request.env['library.book.category'].search([]),
+        })
+
