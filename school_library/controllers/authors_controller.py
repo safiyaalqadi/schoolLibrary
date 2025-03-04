@@ -1,9 +1,7 @@
 from odoo import http,api
 from odoo.http import request
 
-
 class authorController(http.Controller):
-
     @http.route('/author_form', auth='public', website=True)
     def render_auth_form(self ):
         return request.render('school_library.library_author_web_form',{'error': 'Name and Biography are required.'})
@@ -25,8 +23,6 @@ class authorController(http.Controller):
     @http.route('/authors', auth='public', website=True)
     def display_authors(self):
         authors = request.env['library.author'].sudo().search([])
-
-
         return request.render('school_library.library_authors_list', {
             'authors': authors
         })

@@ -25,16 +25,22 @@ class orderscontroller(http.Controller):
      try:
          #total_price = kwargs.get('total_price')
          discount = kwargs.get('discount',0)
-
          #total_price = self.safe_float(total_price)
          #discount = self.safe_float(discount)
-
          #total_price_after_disc = total_price * (discount / 100)
-
+         student= kwargs.get('students_id')
+         order_date=kwargs.get('order_date')
+         total_book=kwargs.get('total_books_borrowed')
          order = request.env['library.book.order'].sudo().create({
-            'students_id': kwargs.get('students_id'),
-            'order_date': kwargs.get('order_date'),
-            'total_books_borrowed': kwargs.get('total_books_borrowed'),
+            'students_id': student,
+            'order_date': order_date,
+            'total_books_borrowed': total_book,
+            'total_price':0,
+            'total_price_after_disc':0,
+            'currency_id':'USA',
+            'discount':0,
+            'total_days':0,
+            'status':'draft',
          })
          return request.render('school_library.library_order_web_submit', {
            'success': True,

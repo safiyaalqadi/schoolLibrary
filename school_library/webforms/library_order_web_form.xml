@@ -4,7 +4,6 @@
 <t t-call="website.layout">
         <div class="container">
             <h1>Library Book Order</h1>
-
             <form id="order_form" method="POST" action="/order_submit" class="o_form">
                 <div class="form-group">
                      <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
@@ -27,8 +26,6 @@
                     <input type="datetime-local" name="return_date" class="form-control"/>
                 </div>
 
-
-
                 <div class="form-group">
                     <label for="discount">Discount</label>
                     <input type="number" name="discount" id="discount" class="form-control" readonly="true"/>
@@ -48,11 +45,9 @@
                         </div>
                     </div>
 
-
                     <div class="form-group">
                         <button type="button" class="btn btn-secondary" id="add-book-row">+ Add Book</button>
                     </div>
-
 
                 <div class="form-group">
                     <label for="total_books_borrowed">Total Books Borrowed</label>
@@ -62,7 +57,6 @@
                     <label for="total_price">Total Price</label>
                     <input type="number" name="total_price" class="form-control" readonly="true"/>
                 </div>
-
 
                 <div class="form-group">
                     <button type="submit" class="btn btn-primary">Submit Order</button>
@@ -91,7 +85,6 @@
         let bookCounter = 1;
         const addButton = document.getElementById('add-book-row');
         const booksContainer = document.getElementById('books-container');
-
 
         function calculateTotalBooks() {
             let totalBooks = 0;

@@ -14,8 +14,7 @@ class studentController(http.Controller):
     @http.route('/top_students', auth='public', website=True)
     def display_top_students(self):
 
-        students = request.env['library.students'].sudo().search([], limit=10,
-                                                                 order='rank desc')
+        students = request.env['library.students'].sudo().search([], limit=10,                                                      order='rank desc')
         return request.render('school_library.library_students_list', {
             'students': students
         })
@@ -28,5 +27,4 @@ class studentController(http.Controller):
         student_d = request.env['library.students'].search(domain)
         return request.render('school_library.library_student_details', {
             'student': student_d,
-
         })

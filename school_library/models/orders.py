@@ -36,7 +36,6 @@ class LibraryBookOrder(models.Model):
     ], string="Status", default='draft', compute='_compute_status_bar',store=True)
 
     order_line_ids = fields.One2many('library.book.order.line', 'order_id', string="Order Lines",ondelete='cascade')
-
     order_reference = fields.Char(
         string="Order Reference",
         required=True,
