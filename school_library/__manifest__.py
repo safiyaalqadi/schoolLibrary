@@ -12,6 +12,7 @@
           'webforms/library_categories_list.xml',
           'webforms/library_students_list.xml',
           'webforms/library_books_list.xml',
+          'webforms/library_order_web_form.xml',
           'webforms/book_web_form.xml',
           'webforms/library_authors_list.xml',
           'security/ir.model.access.csv',

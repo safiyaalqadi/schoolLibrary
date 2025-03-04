@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="library_order_web_form" name="Order Submission Form">
+<t t-call="website.layout">
+        <div class="container">
+            <h1>Library Book Order</h1>
+
+            <form id="order_form" method="POST" action="/order_submit" class="o_form">
+                <div class="form-group">
+                     <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                   <label for="students_id">Library Student</label>
+                      <select name="students_id" id="students_id" class="form-control">
+                           <option value="" disabled="true" selected="true">Select a Student</option>
+                      <t t-foreach="students" t-as="student">
+                     <option value="&lt; t t-esc='student.id'/ &gt;" t-att-data-discount="student.special_discount"><t t-esc="student.name"/></option>
+                       </t>
+                      </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="order_date">Order Date</label>
+                    <input type="datetime-local" name="order_date" class="form-control" t-att-value="order_date" readonly="true"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="return_date">Return Date</label>
+                    <input type="datetime-local" name="return_date" class="form-control"/>
+                </div>
+
+
+
+                <div class="form-group">
+                    <label for="discount">Discount</label>
+                    <input type="number" name="discount" id="discount" class="form-control" readonly="true"/>
+                </div>
+
+                  <div id="books-container">
+                        <div class="book-row form-group">
+                            <label for="book_1">Select Book</label>
+                            <select name="book_1" class="form-control book-select">
+                                <option value="" disabled="true" selected="true">Select a Book</option>
+                                <t t-foreach="books" t-as="book">
+                                    <option t-att-value="book.id"><t t-esc="book.name"/></option>
+                                </t>
+                            </select>
+                            <label for="quantity_1">Quantity</label>
+                            <input type="number" name="quantity_1" class="form-control book-quantity" min="1" required="true"/>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <button type="button" class="btn btn-secondary" id="add-book-row">+ Add Book</button>
+                    </div>
+
+
+                <div class="form-group">
+                    <label for="total_books_borrowed">Total Books Borrowed</label>
+                    <input type="number" name="total_books_borrowed" class="form-control" required="true"/>
+                </div>
+                <div class="form-group">
+                    <label for="total_price">Total Price</label>
+                    <input type="number" name="total_price" class="form-control" readonly="true"/>
+                </div>
+
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Submit Order</button>
+                </div>
+            </form>
+        </div>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+        const studentSelect = document.getElementById('students_id');
+        const discountInput = document.querySelector('input[name="discount"]');
+        const totalBooksInput =document.querySelector('input[name="total_books_borrowed"]')
+
+        studentSelect.addEventListener('change', function() {
+            const selectedOption = studentSelect.options[studentSelect.selectedIndex];
+            const discount = selectedOption.getAttribute('data-discount');
+
+            console.log('Selected Discount:', discount);
+            if (discount !== null &amp;&amp; !isNaN(discount)) {
+                discountInput.value = discount*100;
+            }
+            else{
+             discountInput.value = 0;
+            }
+        });
+
+        let bookCounter = 1;
+        const addButton = document.getElementById('add-book-row');
+        const booksContainer = document.getElementById('books-container');
+
+
+        function calculateTotalBooks() {
+            let totalBooks = 0;
+            const quantityInputs = document.querySelectorAll('.book-quantity');
+            quantityInputs.forEach(input => {
+                totalBooks += parseInt(input.value) || 0;
+            });
+            totalBooksInput.value = totalBooks;
+        }
+
+        const initialQuantityInputs = document.querySelectorAll('.book-quantity');
+        initialQuantityInputs.forEach(input => {
+            input.addEventListener('input', function() {
+                calculateTotalBooks();
+            });
+        });
+
+        addButton.addEventListener('click', function() {
+            bookCounter++;
+            const newRow = document.createElement('div');
+            newRow.classList.add('book-row', 'form-group');
+            newRow.innerHTML = `
+                <label for="book_${bookCounter}">Select Book</label>
+
+                <select name="book_${bookCounter}" class="form-control book-select">
+                     <option value="" disabled="true" selected="true">Select a Book</option>
+                    <t t-foreach="books" t-as="book">
+                        <option t-att-value="book.id"><t t-esc="book.name"/></option>
+                    </t>
+                </select>
+                <label for="quantity_${bookCounter}">Quantity</label>
+                <input type="number" name="quantity_${bookCounter}" class="form-control book-quantity" min="1" required="true"/>
+            `;
+            booksContainer.appendChild(newRow);
+
+             newRow.querySelector('input').addEventListener('input', function() {
+                calculateTotalBooks();
+            });
+
+
+            calculateTotalBooks();
+
+             const initialQuantityInputs = document.querySelectorAll('.book-quantity');
+             initialQuantityInputs.forEach(input => {
+             input.addEventListener('input', function() {
+                calculateTotalBooks();
+            });
+            });
+
+
+           calculateTotalBooks();
+           });
+    });
+</script>
+    </t>
+</template>
+
+    <template id="library_order_web_submit" name="Order Submission>">
+         <t t-call="website.layout">
+               <div class="container">
+             <div>
+                <h3>Thank you for your order!</h3>
+                <p>Your order has been successfully submitted. We will notify you once your books are ready for pickup.</p>
+            </div>
+              <div class="alert alert-danger">
+                    <t t-esc="error" />
+                </div>
+             </div>
+         </t>
+    </template>
+</odoo>
